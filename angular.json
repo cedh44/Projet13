@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "essaiTalkJS": {
+    "Projet13": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/essai-talk-js",
+            "outputPath": "dist/projet13",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "essaiTalkJS:build:production"
+              "browserTarget": "Projet13:build:production"
             },
             "development": {
-              "browserTarget": "essaiTalkJS:build:development"
+              "browserTarget": "Projet13:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "essaiTalkJS:build"
+            "browserTarget": "Projet13:build"
           }
         },
         "test": {

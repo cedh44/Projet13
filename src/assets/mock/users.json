@@ -1,0 +1,20 @@
+[
+  {
+    "id": "0",
+    "username": "support",
+    "password": "test123",
+    "email": "support@yourcaryourway.com",
+    "photoUrl": "https://talkjs.com/images/avatar-1.jpg",
+    "welcomeMessage": "Bonjour, comment puis-je vous aider ?",
+    "role": "default"
+  },
+  {
+    "id": "1",
+    "username": "pierre",
+    "password": "test123",
+    "email": "pierre@gmail.com",
+    "photoUrl": "https://talkjs.com/images/avatar-4.jpg",
+    "welcomeMessage": "Bonjour",
+    "role": "default"
+  }
+]
