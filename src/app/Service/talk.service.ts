@@ -2,28 +2,16 @@ import {Injectable} from '@angular/core';
 import Talk from "talkjs";
 import {SessionService} from './session.service';
 import {User} from "../core/models/user";
+import {UserService} from './user.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class TalkService {
+    //L'objet Talk.user est utilisé pour synchroniser les données avec TalkJS
     private currentUser!: Talk.User;
 
-    /*
-    async createUser(applicationUser: any) {
-        await Talk.ready;
-        return new Talk.User({
-            id: 0,
-            name: 'Josiane',
-            photoUrl: 'https://talkjs.com/images/avatar-1.jpg',
-            role: 'default'
-        });
-    }
-    */
-
-    //L'objet Talk.user est utilisé pour synchroniser les données avec TalkJS
-
-    constructor(private sessionService: SessionService) {
+    constructor(private sessionService: SessionService, private userService: UserService) {
     }
 
     //Une session réprésente un onglet actif dans le navigateur du user
@@ -39,7 +27,7 @@ export class TalkService {
         });
     }
 
-    //Ici la méthode récupère la conversation entre deux utilisateurs si existante
+    //Ici la méthode récupère la conversation entre deux utilisateurs (si existante)
     //Ici on récupère les données en session suite au login du user
     async createCurrentSession() {
         await Talk.ready;
@@ -52,8 +40,6 @@ export class TalkService {
             welcomeMessage: this.sessionService.userSession.welcomeMessage,
             role: this.sessionService.userSession.role
         };
-        console.log('createCurrentSession / create user');
-        console.log('createCurrentSession / username : '+user.username);
         this.currentUser = await this.createTalkUser(user);
         const session = new Talk.Session({
             appId: 't6znNRfu', me: this.currentUser
@@ -62,29 +48,36 @@ export class TalkService {
     }
 
     async createInbox(session: Talk.Session) {
-        let otherApplicationUser = undefined;
-        console.log("createInbox / this.sessionService.userSession.id = "+this.sessionService.userSession.id);
+        let otherApplicationUser = {
+            id: '',
+            username: '',
+            password: '',
+            email: '',
+            photoUrl: '',
+            welcomeMessage: ''
+        };
+
+        //Dans ce POC nous avons que 2 utilisateurs donc otherApplicationUser prend les valeurs du user non connecté
         if (this.sessionService.userSession.id == '0') {
             otherApplicationUser = {
-                id: '1',
-                username: 'pierre',
+                id: this.sessionService.usersSession[1].id,
+                username: this.sessionService.usersSession[1].username,
                 password: '',
-                email: 'pierre@gmail.com',
-                photoUrl: 'https://talkjs.com/images/avatar-4.jpg',
-                welcomeMessage: 'Bonjour'
+                email: this.sessionService.usersSession[1].email,
+                photoUrl: this.sessionService.usersSession[1].photoUrl,
+                welcomeMessage: this.sessionService.usersSession[1].welcomeMessage
             }
-            console.log("otherApplicationUser.id : "+otherApplicationUser.id);
         } else {
             otherApplicationUser = {
-                id: '0',
-                username: 'support',
+                id: this.sessionService.usersSession[0].id,
+                username: this.sessionService.usersSession[0].username,
                 password: '',
-                email: 'support@yourcaryourway.com',
-                photoUrl: 'https://talkjs.com/images/avatar-1.jpg',
-                welcomeMessage: 'Bonjour, comment peut-on vous aider ?'
+                email: this.sessionService.usersSession[0].email,
+                photoUrl: this.sessionService.usersSession[0].photoUrl,
+                welcomeMessage: this.sessionService.usersSession[0].welcomeMessage
             }
-            console.log("otherApplicationUser.id) : "+otherApplicationUser.id);
         }
+
         const conversation = await this.getOrCreateConversation(session, otherApplicationUser);
         const inbox = session.createInbox();
         inbox.select(conversation);

@@ -16,8 +16,14 @@ export class SessionService {
     role: ''
   };
 
+  public usersSession: User[] = [];
+
   public logIn(user: User): void {
     this.userSession = user;
+  }
+
+  public saveUsersInSession(users : User[]): void {
+    this.usersSession = users;
   }
 
 }

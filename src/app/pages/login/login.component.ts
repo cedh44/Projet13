@@ -21,7 +21,9 @@ export class LoginComponent {
                 const user = users.find((u: User) => u.username === this.username && u.password === this.password);
                 if (user) {
                     console.log('Authentification réussie');
+                    //On garde en session le user connecté et le tableau de users
                     this.sessionService.logIn(user);
+                    this.sessionService.saveUsersInSession(users);
                     this.router.navigate(['home']);
                 } else {
                     this.errorMessage = 'Mauvais utilisateur ou mot de passe';
