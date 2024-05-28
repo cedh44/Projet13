@@ -7,7 +7,7 @@ import {ChatTalkjsComponent} from './pages/chat-talkjs/chat-talkjs.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {AppRoutingModule} from './app-routing.module';
-import { HomeComponent } from './pages/home/home.component';
+import {HomeComponent} from './pages/home/home.component';
 
 @NgModule({
     declarations: [

@@ -1,17 +1,19 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {User} from "../core/models/user";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class UserService {
-  private usersUrl = './assets/mock/users.json';
+    private usersUrl = './assets/mock/users.json';
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+    }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.usersUrl);
-  }
+    //Récupération des utilisateurs depuis le fichier json
+    getUsers(): Observable<User[]> {
+        return this.http.get<User[]>(this.usersUrl);
+    }
 }

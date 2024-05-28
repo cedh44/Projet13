@@ -1,29 +1,31 @@
-import { Injectable } from '@angular/core';
-import { User } from '../core/models/user';
+import {Injectable} from '@angular/core';
+import {User} from '../core/models/user';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class SessionService {
 
-  public userSession: User = {
-    id: '',
-    username: '',
-    password: '',
-    email: '',
-    photoUrl: '',
-    welcomeMessage: '',
-    role: ''
-  };
+    public userSession: User = {
+        id: '',
+        username: '',
+        password: '',
+        email: '',
+        photoUrl: '',
+        welcomeMessage: '',
+        role: ''
+    };
 
-  public usersSession: User[] = [];
+    public usersSession: User[] = [];
 
-  public logIn(user: User): void {
-    this.userSession = user;
-  }
+    //Mise en session du user connecté
+    public logIn(user: User): void {
+        this.userSession = user;
+    }
 
-  public saveUsersInSession(users : User[]): void {
-    this.usersSession = users;
-  }
+    //Mise en session du tableau de users
+    public saveUsersInSession(users: User[]): void {
+        this.usersSession = users;
+    }
 
 }

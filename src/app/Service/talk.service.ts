@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import Talk from "talkjs";
 import {SessionService} from './session.service';
 import {User} from "../core/models/user";
-import {UserService} from './user.service';
 
 @Injectable({
     providedIn: 'root'
@@ -11,11 +10,10 @@ export class TalkService {
     //L'objet Talk.user est utilisé pour synchroniser les données avec TalkJS
     private currentUser!: Talk.User;
 
-    constructor(private sessionService: SessionService, private userService: UserService) {
+    constructor(private sessionService: SessionService) {
     }
 
-    //Une session réprésente un onglet actif dans le navigateur du user
-    //qu'on pourra afficher dans l'UI du chat
+    //Création du TalkUser
     async createTalkUser(applicationUser: User) {
         await Talk.ready;
         return new Talk.User({
@@ -27,8 +25,8 @@ export class TalkService {
         });
     }
 
-    //Ici la méthode récupère la conversation entre deux utilisateurs (si existante)
-    //Ici on récupère les données en session suite au login du user
+    //Une session réprésente un onglet actif dans le navigateur du user
+    //qu'on pourra afficher dans l'UI du chat
     async createCurrentSession() {
         await Talk.ready;
         const user = {
@@ -47,6 +45,18 @@ export class TalkService {
         return session;
     }
 
+    //Ici la méthode récupère la conversation entre deux utilisateurs (si existante)
+    async getOrCreateConversation(session: Talk.Session, otherApplicationUser: any) {
+        const otherUser = await this.createTalkUser(otherApplicationUser);
+        //Talk.oneOnOneId calcule l'ID de conversation basé sur les ID des participants
+        const conversation = session.getOrCreateConversation(Talk.oneOnOneId(this.currentUser, otherUser));
+        conversation.setParticipant(this.currentUser);
+        conversation.setParticipant(otherUser);
+        return conversation;
+    }
+
+    //Inbox permet d'afficher la conversation, ici entre nos deux utilisateurs, et d'écrire des messages
+    //On a notre utilisateur connecté présent dans l'objet session et l'autre utilisateur avec qui il converse dans l'objet otherApplicationUser
     async createInbox(session: Talk.Session) {
         let otherApplicationUser = {
             id: '',
@@ -82,14 +92,5 @@ export class TalkService {
         const inbox = session.createInbox();
         inbox.select(conversation);
         return inbox;
-    }
-
-    async getOrCreateConversation(session: Talk.Session, otherApplicationUser: any) {
-        const otherUser = await this.createTalkUser(otherApplicationUser);
-        //Talk.oneOnOneId calcule l'ID de conversation basé sur les ID des participants
-        const conversation = session.getOrCreateConversation(Talk.oneOnOneId(this.currentUser, otherUser));
-        conversation.setParticipant(this.currentUser);
-        conversation.setParticipant(otherUser);
-        return conversation;
     }
 }

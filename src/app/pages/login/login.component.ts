@@ -11,10 +11,11 @@ export class LoginComponent {
     username: string = '';
     password: string = '';
     errorMessage: string = '';
-
     constructor(private userService: UserService, private router: Router, private sessionService: SessionService) {
     }
 
+    //Authentification de l'utilisateur, on vérifie que le couplet user/password est bien dans le fichier json
+    //Si oui, on met le user et le tableau de user en session
     login(): void {
         this.userService.getUsers().subscribe({
             next: (users) => {
