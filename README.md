@@ -1,4 +1,4 @@
-# POC (Proof Of Concept) pour Your Car 
+# POC pour Your Car Your Way
 
 Cette application est un POC (Proof Of Concept - preuve de concept) pour Your Car Your Way. Le but est de démontrer la faisabilité de la fonctionnalité d’échange avec le service client via un chat en ligne.
 
