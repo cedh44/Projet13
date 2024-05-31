@@ -1,27 +1,41 @@
-# Projet 13 - Your Car Your Way
+# POC (Proof Of Concept) pour Your Car 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.1.
+Cette application est un POC (Proof Of Concept - preuve de concept) pour Your Car Your Way. Le but est de démontrer la faisabilité de la fonctionnalité d’échange avec le service client via un chat en ligne.
 
-## Development server
+## Pré-requis
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Préalablement, il est nécessaire d'avoir sur le poste :
+- Angular (14.1.3 ou supérieur)
 
-## Code scaffolding
+## Récupérer les sources du projet
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Dans un terminal, placez vous dans un répertoire où déposer les sources et tapez : `git clone https://github.com/cedh44/Projet13.git`
 
-## Build
+## Installer l'application
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Front :
+- dans un terminal, depuis la racine du Projet13 : `cd front`
+- puis `npm install` pour installer les dépendances
 
-## Running unit tests
+## Lancer l'application
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Front :
+- dans un terminal, depuis le répertoire front : `npm run start`
+- l'application est disponible à l'url http://localhost:4200/
 
-## Running end-to-end tests
+## Tester l'application
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Vous pouvez utiliser les utilisateurs suivants pour vous connecter à l'application sur 2 pages différentes :
+- user : "support" / password : "test123" en tant que support (ou service client)
+- user : "pierre" / password : "test123" en tant que client
 
-## Further help
+## Technologies
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Angular
+- Git
+- TalkJS
+- BootStrap
+
+## Licence
+
+Développé dans le cadre du projet 13 de la formation Développeur Full-Stack - Java et Angular (OpenClassrooms)
