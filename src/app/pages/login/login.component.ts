@@ -11,6 +11,7 @@ export class LoginComponent {
     username: string = '';
     password: string = '';
     errorMessage: string = '';
+
     constructor(private userService: UserService, private router: Router, private sessionService: SessionService) {
     }
 
@@ -25,7 +26,13 @@ export class LoginComponent {
                     //On garde en session le user connecté et le tableau de users
                     this.sessionService.logIn(user);
                     this.sessionService.saveUsersInSession(users);
-                    this.router.navigate(['home']);
+                    if (user.id === "0") {
+                        //En tant que support, redirection aussitôt vers le chat
+                        this.router.navigate(['chat']);
+                    } else {
+                        //En tant qu'utilisateur, redirection vers home (avec lien vers le chat)
+                        this.router.navigate(['home']);
+                    }
                 } else {
                     this.errorMessage = 'Mauvais utilisateur ou mot de passe';
                 }

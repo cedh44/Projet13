@@ -1,15 +1,22 @@
-<div class="login-container">
-    <h2>Login</h2>
+<div class="container d-flex flex-column align-items-center mt-5">
     <form (ngSubmit)="login()">
-        <div>
-            <label for="username">Nom : </label>
-            <input type="text" id="username" [(ngModel)]="username" name="username">
+        <h3>Login</h3>
+        <div class="row g-3 align-items-center">
+            <div class="col-auto">
+                <label for="username" class="form-label">Nom : </label>
+                <input type="text" id="username" [(ngModel)]="username" name="username" class="form-control"
+                       aria-describedby="nameHelp">
+            </div>
         </div>
-        <div>
-            <label for="username">Mot de passe : </label>
-            <input type="password" id="password" [(ngModel)]="password" name="password">
+        <div class="row g-3 align-items-center">
+            <div class="col-auto">
+                <label for="username">Mot de passe : </label>
+                <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control"
+                       aria-describedby="passwordHelpInline">
+            </div>
         </div>
-        <div *ngIf="errorMessage" class="error-message"> {{ errorMessage }} </div>
-        <button type="submit">Login</button>
+        <div *ngIf="errorMessage" class="error-message"> {{ errorMessage }}</div>
+        <br/>
+        <button type="submit" class="btn btn-primary">Login</button>
     </form>
 </div>
