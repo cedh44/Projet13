@@ -68,25 +68,15 @@ export class TalkService {
         };
 
         //Dans ce POC nous avons que 2 utilisateurs donc otherApplicationUser prend les valeurs du user non connecté
-        if (this.sessionService.userSession.id == '0') {
-            otherApplicationUser = {
-                id: this.sessionService.usersSession[1].id,
-                username: this.sessionService.usersSession[1].username,
-                password: '',
-                email: this.sessionService.usersSession[1].email,
-                photoUrl: this.sessionService.usersSession[1].photoUrl,
-                welcomeMessage: this.sessionService.usersSession[1].welcomeMessage
-            }
-        } else {
-            otherApplicationUser = {
-                id: this.sessionService.usersSession[0].id,
-                username: this.sessionService.usersSession[0].username,
-                password: '',
-                email: this.sessionService.usersSession[0].email,
-                photoUrl: this.sessionService.usersSession[0].photoUrl,
-                welcomeMessage: this.sessionService.usersSession[0].welcomeMessage
-            }
-        }
+        const userIndex = (this.sessionService.userSession.id == '0') ? 1 : 0;
+        otherApplicationUser = {
+            id: this.sessionService.usersSession[userIndex].id,
+            username: this.sessionService.usersSession[userIndex].username,
+            password: '',
+            email: this.sessionService.usersSession[userIndex].email,
+            photoUrl: this.sessionService.usersSession[userIndex].photoUrl,
+            welcomeMessage: this.sessionService.usersSession[userIndex].welcomeMessage
+        };
 
         const conversation = await this.getOrCreateConversation(session, otherApplicationUser);
         const inbox = session.createInbox();
